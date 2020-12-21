@@ -17,6 +17,8 @@ plotnine
 imblearn
 beautifulsoup4
 tabulate
+GitPython
+javadiff
 
 # testing requirements
 pytest

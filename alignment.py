@@ -174,7 +174,8 @@ def save_tickets_stats(out_file, gitPath, jira_url, jira_project_name, versions)
 
 
 if __name__ == "__main__":
-
-    get_repo_adata('C:\\temp\\apache_repos\\logging-log4j2', 'log4j2')
+    # make requirements
+    # git clone --branch release-2.x https://gitbox.apache.org/repos/asf/logging-log4j2.git
+    get_repo_adata('repository_data/logging-log4j2', 'log4j2')
 
     pass
