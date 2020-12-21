@@ -9,13 +9,14 @@ from fixing_issues import get_commits_between_versions, Version_Info, commits_an
 from commit import Commit
 from caching import cached
 from apache_repos import get_apache_repos_data
+from functools import reduce
 
 VERSIONS = os.path.join(REPOSIROTY_DATA_DIR, r"apache_versions")
 
 def get_repo_adata(repo_path, jira_key):
 
     if not os.path.exists(repo_path):
-        print "start git clone https://github.com/apache/{0}.git".format(os.path.basename(repo_path))
+        print("start git clone https://github.com/apache/{0}.git".format(os.path.basename(repo_path)))
         return
 
     versions = get_repo_versions(repo_path)
@@ -56,7 +57,7 @@ def get_jira_data(jira_project_name, jira_url, gitPath):
     dict_issues = {x.key.strip().split("-")[1]:x for x in get_jira_issues(jira_project_name, jira_url)}
     #issues = map(lambda x: x.key.strip(), get_jira_issues(jira_project_name, jira_url))
     commits = commits_and_all_issues(repo, dict_issues)
-    print jira_project_name, "num issues: " , len(dict_issues.keys()), "num bug commits: ", len(filter(lambda c: c.is_bug(), commits))
+    print(jira_project_name, "num issues: " , len(dict_issues.keys()), "num bug commits: ", len(filter(lambda c: c.is_bug(), commits)))
     return commits
 
 
@@ -88,7 +89,8 @@ def get_jira_types(commits):
     type_commits = {}
     for t in issue_types:
         type_commits[t] = sum(c._issue.type == t for c in commits)
-    for k, v in type_commits.items(): print k, ": ", v
+    for k, v in type_commits.items(): 
+        print(k, ": ", v)
     return type_commits.keys()
 
 
